@@ -1,6 +1,8 @@
-# vansol
+# Vansol
 
-**vansol** is a high-performance CLI tool for generating Solana vanity addresses using multithreaded search powered by Rayon in Rust.
+![Demo](https://i.ibb.co/7wRsHXw/demo.gif)
+
+**Vansol** is a high-performance CLI tool for generating Solana vanity addresses using multithreaded search powered by Rayon in Rust.
 
 ## Features
 - Generate Solana keypairs with custom prefixes, suffixes, or substrings in the public key
@@ -8,11 +10,22 @@
 - Save generated keypairs to JSON files
 - Customizable number of results and threads
 
+## Benchmarks
+
+| CPUs/Threads | Pattern        | Count | Time (approx) | Example Command                                 |
+|--------------|---------------|-------|---------------|-------------------------------------------------|
+| 8            | prefix: sol   | 1     | 1-2 sec       | `--prefix sol`                                  |
+| 8            | contain: dev  | 5     | 5-10 sec      | `--contain dev --n 5`                           |
+| 16           | prefix: test  | 10    | 3-8 sec       | `--prefix test --n 10 --threads 16`             |
+| 4            | suffix: xyz   | 1     | <1 sec        | `--suffix xyz --threads 4`                      |
+
+*Benchmarks are approximate and depend on CPU, pattern complexity, and randomness.*
+
 ## Installation
 
 1. Clone the repository:
    ```sh
-   git clone <your-repo-url>
+   git clone https://github.com/ichsanputr/vansol.git
    cd vansol
    ```
 2. Build with Cargo:
@@ -21,7 +34,22 @@
    ```
 3. The binary will be in `target/release/vansol` (or `vansol.exe` on Windows).
 
+### Install from Release Page
+
+You can also download pre-built binaries for **Windows** and **Linux** from the [Releases page](https://github.com/ichsanputr/vansol/releases):
+
+- Download the appropriate binary for your OS (e.g., `vansol.exe` for Windows, `vansol` for Linux)
+- Place it in a directory in your `PATH`
+- Make it executable on Linux: `chmod +x vansol`
+
 ## Usage
+
+```sh
+vansol -- [OPTIONS] 
+
+```
+
+If you clone this project.
 
 ```sh
 cargo run -- [OPTIONS]
@@ -41,12 +69,12 @@ Or, after building:
 ### Example
 Generate a Solana address starting with `sol` and ending with `dev`:
 ```sh
-cargo run -- --prefix sol --suffix dev
+vansol --prefix sol --suffix dev
 ```
 
 Generate 5 addresses containing `test` using 8 threads:
 ```sh
-cargo run -- --contain test --n 5 --threads 8
+vansol --contain test --n 5 --threads 8
 ```
 
 ## License
