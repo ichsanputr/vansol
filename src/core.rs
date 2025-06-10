@@ -13,12 +13,18 @@ use std::time::Instant;
 use std::vec::Vec;
 use crate::args::Arguments;
 
-pub fn generate_vanity_address(args: &Arguments) {
+pub fn generate_vanity_address(args: &Arguments) {    
     if args.prefix.is_none() && args.suffix.is_none() && args.contain.is_none() {
-        println!("No arguments provided, creating a random address instead");
         let keypair: Keypair = Keypair::new();
+        let strings_bytes = serde_json::to_string_pretty(&keypair.to_bytes().to_vec()).unwrap();
+        write_to_file(strings_bytes, "vanity_address.json");
+
+        std::thread::sleep(std::time::Duration::from_secs(1));
+
+        println!("✅ Vanity Address Found!");
         println!("Public Key: {:?}", keypair.pubkey());
-        println!("Secret Key: {:?}", keypair.to_bytes());
+        println!("Saved file to: vanity_address_{}.json", keypair.pubkey());
+
         return;
     }
     let start_time = Instant::now();
