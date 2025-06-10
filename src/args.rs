@@ -46,4 +46,11 @@ mod tests {
         assert_eq!(args.suffix, Some("john".to_string()));
         assert_ne!(args.threads, 1);
     }
+
+    #[test]
+    fn test_multiple_n() {
+        let args = Arguments::parse_from(&["vansol", "--prefix", "sol", "--n", "5"]);
+        assert_eq!(args.prefix, Some("sol".to_string()));
+        assert_eq!(args.n, 5);
+    }
 } 
