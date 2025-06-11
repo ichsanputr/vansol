@@ -8,8 +8,11 @@ use args::Arguments;
 use clap::Parser;
 
 fn main() {
-    let args = Arguments::parse();
+    let cli_args = Arguments::parse();
+    let config = args::Config::from_file();
+    let args = cli_args.merge_with_config(config.clone());
     let pb = ProgressBar::new_spinner();
+
     pb.enable_steady_tick(Duration::from_millis(120));
     pb.set_style(
         ProgressStyle::with_template("{spinner:.blue} {msg}")
@@ -17,7 +20,10 @@ fn main() {
             .tick_strings(&["⠋", "⠙", "⠚", "⠞", "⠖", "⠦", "⠴", "⠲", "⠳", "⠓"]),
     );
     pb.set_message("Generating vanity address...");
-    core::generate_vanity_address(&args);
+
+    // Generate the vanity address
+    core::generate_vanity_address(&args, config.as_ref(), &pb);
+    
     pb.finish_with_message("Done");
 }
 

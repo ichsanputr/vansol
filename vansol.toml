@@ -1,0 +1,3 @@
+prefix = "so"
+n = 1
+threads = 10

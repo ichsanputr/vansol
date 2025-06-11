@@ -9,6 +9,7 @@
 - Multithreaded for fast searching using the Rayon library
 - Save generated keypairs to JSON files
 - Customizable number of results and threads
+- **Read default options from a `vansol.toml` configuration file**
 
 ## Benchmarks
 
@@ -79,3 +80,11 @@ vansol --contain test --n 5 --threads 8
 
 ## License
 MIT 
+
+## Recent Updates (v1.1.0, June 2024)
+
+- **Configuration File Support:** You can now set default options in a `vansol.toml` file in your home or current directory. CLI arguments always override config file values.
+- **Table Output:** Results and loaded config parameters are now displayed in a clean table format in the terminal for better readability.
+- **Config Display:** If a config file is loaded, its parameters are shown in a table before the search begins.
+- **Improved Spinner Handling:** Output is now clean and readable, with the progress spinner pausing automatically when printing tables or messages.
+- **Dependencies Added:** `toml`, `dirs`, `serde`, and `prettytable` crates are now used for config parsing and table output. 
