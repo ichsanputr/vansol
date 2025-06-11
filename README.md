@@ -81,7 +81,7 @@ vansol --contain test --n 5 --threads 8
 ## License
 MIT 
 
-## Recent Updates (v1.1.0, June 2024)
+## Recent Updates (v1.1.0, June 2025)
 
 - **Configuration File Support:** You can now set default options in a `vansol.toml` file in your home or current directory. CLI arguments always override config file values.
 - **Table Output:** Results and loaded config parameters are now displayed in a clean table format in the terminal for better readability.
